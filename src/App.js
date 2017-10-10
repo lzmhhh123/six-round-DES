@@ -276,6 +276,19 @@ class App extends Component {
         <Card>
           <Tabs tabPosition="left">
             <Tabs.TabPane key="encryption" tab="encryption">
+              <Alert
+                message="Notice About Encryption"
+                type="info"
+                showIcon
+                description={
+                  <span>
+                    <span>Please read the <strong>README.md</strong> carefully before use this six-round-DES.</span>
+                    <br />
+                    <span>{`The CBC model\'s initial Vector IV is [0, 0, ..., 0]`}</span>
+                  </span>
+                }
+              />
+              <br />
               <span>
                 <Tag color="blue">Key(Hexadecimal):</Tag>0x
                 {this.mapInputNumber("encryption")}
@@ -304,11 +317,24 @@ class App extends Component {
               />
               <Upload {...props}>
                 <Button>
-                  <Icon type="upload" /> Click to Upload
+                  <Icon type="upload" /> Click to Upload .txt File
                 </Button>
               </Upload>
             </Tabs.TabPane>
             <Tabs.TabPane key="decryption" tab="decryption">
+              <Alert
+                message="Notice About Decryption"
+                type="info"
+                showIcon
+                description={
+                  <span>
+                    <span>Please read the <strong>README.md</strong> carefully before use this six-round-DES.</span>
+                    <br />
+                    <span>{`The CBC model\'s initial Vector IV is [0, 0, ..., 0]`}</span>
+                  </span>
+                }
+              />
+              <br />
               <span>
                 <Tag color="blue">Key(Hexadecimal):</Tag>0x
                 {this.mapInputNumber("decryption")}
@@ -337,7 +363,7 @@ class App extends Component {
               />
               <Upload {...props}>
                 <Button>
-                  <Icon type="upload" /> Click to Upload
+                  <Icon type="upload" /> Click to Upload Binary Secret File
                 </Button>
               </Upload>
             </Tabs.TabPane>
