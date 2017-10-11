@@ -1,0 +1,4 @@
+::1 GET /service-worker.js
+::1 GET /favicon.ico
+::1 GET /service-worker.js
+::1 POST /api/uploadToEncryption

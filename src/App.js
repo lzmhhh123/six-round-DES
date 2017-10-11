@@ -254,11 +254,29 @@ class App extends Component {
     }
   }
   render() {
-    const props = {
+    console.log(new Array(
+      this.state.encryptionKey1,
+      this.state.encryptionKey2,
+      this.state.encryptionKey3,
+      this.state.encryptionKey4,
+      this.state.encryptionKey5,
+      this.state.encryptionKey6
+    ));
+    const encryptionProps = {
       name: 'file',
-      action: '//jsonplaceholder.typicode.com/posts/',
+      action: '/api/uploadToEncryption',
       headers: {
         authorization: 'authorization-text',
+      },
+      data: {
+        keys: new Array(
+          this.state.encryptionKey1,
+          this.state.encryptionKey2,
+          this.state.encryptionKey3,
+          this.state.encryptionKey4,
+          this.state.encryptionKey5,
+          this.state.encryptionKey6
+        )
       },
       onChange(info) {
         if (info.file.status !== 'uploading') {
@@ -284,7 +302,7 @@ class App extends Component {
                   <span>
                     <span>Please read the <strong>README.md</strong> carefully before use this six-round-DES.</span>
                     <br />
-                    <span>{`The CBC model\'s initial Vector IV is [0, 0, ..., 0]`}</span>
+                    <span>{`It\' use the CBC model to resolve text. The CBC model\'s initial Vector IV is [0, 0, ..., 0]`}</span>
                   </span>
                 }
               />
@@ -315,7 +333,7 @@ class App extends Component {
                 key5={this.state.encryptionKey5}
                 key6={this.state.encryptionKey6}
               />
-              <Upload {...props}>
+              <Upload {...encryptionProps}>
                 <Button>
                   <Icon type="upload" /> Click to Upload .txt File
                 </Button>
@@ -330,7 +348,7 @@ class App extends Component {
                   <span>
                     <span>Please read the <strong>README.md</strong> carefully before use this six-round-DES.</span>
                     <br />
-                    <span>{`The CBC model\'s initial Vector IV is [0, 0, ..., 0]`}</span>
+                    <span>{`It\' use the CBC model to resolve text. The CBC model\'s initial Vector IV is [0, 0, ..., 0]`}</span>
                   </span>
                 }
               />
@@ -361,7 +379,7 @@ class App extends Component {
                 key5={this.state.decryptionKey5}
                 key6={this.state.decryptionKey6}
               />
-              <Upload {...props}>
+              <Upload {...encryptionProps}>
                 <Button>
                   <Icon type="upload" /> Click to Upload Binary Secret File
                 </Button>
