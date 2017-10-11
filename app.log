@@ -1,4 +1,16 @@
 ::1 GET /service-worker.js
 ::1 GET /favicon.ico
 ::1 GET /service-worker.js
+::1 GET /service-worker.js
+::1 GET /service-worker.js
 ::1 POST /api/uploadToEncryption
+::1 GET /service-worker.js
+::1 GET /service-worker.js
+::1 GET /service-worker.js
+::1 GET /service-worker.js
+::1 GET /static/js/main.2e7ec031.js.map
+::1 GET /static/css/main.2ae1ca9e.css.map
+::1 GET /static/css/main.2ae1ca9e.css.map
+::1 GET /static/js/main.2e7ec031.js.map
+::1 GET /service-worker.js
+::1 GET /service-worker.js

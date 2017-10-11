@@ -103,9 +103,11 @@ class App extends Component {
       decryptionKey4: [],
       decryptionKey5: [],
       decryptionKey6: [],
+      isEncryptedSuccess: false
     };
     this.mapInputNumber = this.mapInputNumber.bind(this);
     this.generateKeys = this.generateKeys.bind(this);
+    this.changeEncrytion = this.changeEncrytion.bind(this);
   }
   componentWillMount() {
     let s = '';
@@ -132,6 +134,17 @@ class App extends Component {
       decryptionKey5: key,
       decryptionKey6: key,
     });
+  }
+  changeEncrytion(info) {
+    if (info.file.status !== 'uploading') {
+      console.log(info.file, info.fileList);
+    }
+    if (info.file.status === 'done') {
+      message.success(`${info.file.name} file encrypt successfully`);
+      this.setState({isEncryptedSuccess: true})
+    } else if (info.file.status === 'error') {
+      message.error(`${info.file.name} file upload failed.`);
+    }
   }
   mapInputNumber(className) {
     let array = new Array(16);
@@ -261,7 +274,7 @@ class App extends Component {
       this.state.encryptionKey4,
       this.state.encryptionKey5,
       this.state.encryptionKey6
-    ));
+    ), this.state.isEncryptedSuccess);
     const encryptionProps = {
       name: 'file',
       action: '/api/uploadToEncryption',
@@ -278,16 +291,7 @@ class App extends Component {
           this.state.encryptionKey6
         )
       },
-      onChange(info) {
-        if (info.file.status !== 'uploading') {
-          console.log(info.file, info.fileList);
-        }
-        if (info.file.status === 'done') {
-          message.success(`${info.file.name} file uploaded successfully`);
-        } else if (info.file.status === 'error') {
-          message.error(`${info.file.name} file upload failed.`);
-        }
-      },
+      onChange: this.changeEncrytion,
     };
     return (
       <div className="Container">
@@ -337,6 +341,23 @@ class App extends Component {
                 <Button>
                   <Icon type="upload" /> Click to Upload .txt File
                 </Button>
+                {
+                  this.state.isEncryptedSuccess ?
+                  <div>
+                    <Alert type="success" message="Please Click the following file to download." showIcon />
+                    <div class="ant-upload-list ant-upload-list-text" onClick={() => {window.open('/build/EncryptionFile')}}>
+                      <div class="ant-upload-list-item ant-upload-list-item-done">
+                        <div class="ant-upload-list-item-info">
+                          <span>
+                            <i class="anticon anticon-paper-clip" />
+                            <span class="ant-upload-list-item-name" title="">EncryptionFile</span>
+                          </span>
+                        </div>
+                        <i title="删除文件" class="anticon anticon-cross" />
+                      </div>
+                    </div>
+                  </div> : null
+                }
               </Upload>
             </Tabs.TabPane>
             <Tabs.TabPane key="decryption" tab="decryption">
@@ -383,6 +404,23 @@ class App extends Component {
                 <Button>
                   <Icon type="upload" /> Click to Upload Binary Secret File
                 </Button>
+                {
+                  this.state.isEncryptedSuccess ?
+                  <div>
+                    <Alert type="success" message="Please Click the following file to download." showIcon />
+                    <div class="ant-upload-list ant-upload-list-text" onClick={() => {window.open('/build/EncryptionFile')}}>
+                      <div class="ant-upload-list-item ant-upload-list-item-done">
+                        <div class="ant-upload-list-item-info">
+                          <span>
+                            <i class="anticon anticon-paper-clip" />
+                            <span class="ant-upload-list-item-name" title="">EncryptionFile</span>
+                          </span>
+                        </div>
+                        <i title="删除文件" class="anticon anticon-cross" />
+                      </div>
+                    </div>
+                  </div> : null
+                }
               </Upload>
             </Tabs.TabPane>
           </Tabs>
