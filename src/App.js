@@ -103,11 +103,13 @@ class App extends Component {
       decryptionKey4: [],
       decryptionKey5: [],
       decryptionKey6: [],
-      isEncryptedSuccess: false
+      isEncryptedSuccess: false,
+      isDecryptedSuccess: false
     };
     this.mapInputNumber = this.mapInputNumber.bind(this);
     this.generateKeys = this.generateKeys.bind(this);
     this.changeEncrytion = this.changeEncrytion.bind(this);
+    this.changeDecrytion = this.changeDecrytion.bind(this);
   }
   componentWillMount() {
     let s = '';
@@ -142,6 +144,17 @@ class App extends Component {
     if (info.file.status === 'done') {
       message.success(`${info.file.name} file encrypt successfully`);
       this.setState({isEncryptedSuccess: true})
+    } else if (info.file.status === 'error') {
+      message.error(`${info.file.name} file upload failed.`);
+    }
+  }
+  changeDecrytion(info) {
+    if (info.file.status !== 'uploading') {
+      console.log(info.file, info.fileList);
+    }
+    if (info.file.status === 'done') {
+      message.success(`${info.file.name} file encrypt successfully`);
+      this.setState({isDecryptedSuccess: true})
     } else if (info.file.status === 'error') {
       message.error(`${info.file.name} file upload failed.`);
     }
@@ -293,6 +306,24 @@ class App extends Component {
       },
       onChange: this.changeEncrytion,
     };
+    const decryptionProps = {
+      name: 'file',
+      action: '/api/uploadToDecryption',
+      headers: {
+        authorization: 'authorization-text',
+      },
+      data: {
+        keys: new Array(
+          this.state.decryptionKey1,
+          this.state.decryptionKey2,
+          this.state.decryptionKey3,
+          this.state.decryptionKey4,
+          this.state.decryptionKey5,
+          this.state.decryptionKey6
+        )
+      },
+      onChange: this.changeDecrytion,
+    };
     return (
       <div className="Container">
         <Card>
@@ -347,24 +378,24 @@ class App extends Component {
                 <Alert type="success" message="Please Click the following file to download." showIcon /> : null
               }
               <Upload disabled>
-                {
-                  this.state.isEncryptedSuccess ?
-                  <div>
-                    <a href="/encryption/" download="EncryptedFile">
-                      <div class="ant-upload-list ant-upload-list-text" >
-                        <div class="ant-upload-list-item ant-upload-list-item-done">
-                          <div class="ant-upload-list-item-info">
-                            <span>
-                              <i class="anticon anticon-paper-clip" />
-                              <span class="ant-upload-list-item-name" title="">EncryptedFile</span>
-                            </span>
-                          </div>
-                          <i title="删除文件" class="anticon anticon-cross" />
+              {
+                this.state.isEncryptedSuccess ?
+                <div>
+                  <a href="/encryption/EncryptedFile">
+                    <div class="ant-upload-list ant-upload-list-text" >
+                      <div class="ant-upload-list-item ant-upload-list-item-done">
+                        <div class="ant-upload-list-item-info">
+                          <span>
+                            <i class="anticon anticon-paper-clip" />
+                            <span class="ant-upload-list-item-name" title="">EncryptedFile</span>
+                          </span>
                         </div>
+                        <i title="删除文件" class="anticon anticon-cross" />
                       </div>
-                    </a>
-                  </div> : null
-                }
+                    </div>
+                  </a>
+                </div> : null
+              }
               </Upload>
             </Tabs.TabPane>
             <Tabs.TabPane key="decryption" tab="decryption">
@@ -407,32 +438,34 @@ class App extends Component {
                 key5={this.state.decryptionKey5}
                 key6={this.state.decryptionKey6}
               />
-              <Upload {...encryptionProps}>
+              <Upload {...decryptionProps}>
                 <Button>
                   <Icon type="upload" /> Click to Upload Binary Secret File
                 </Button>
               </Upload>
               {
-                this.state.isEncryptedSuccess ?
+                this.state.isDecryptedSuccess ?
                 <Alert type="success" message="Please Click the following file to download." showIcon /> : null
               }
-              <Upload>
-                {
-                  this.state.isEncryptedSuccess ?
-                  <div>
-                    <div class="ant-upload-list ant-upload-list-text" onClick={() => {window.open('/encryption/EncryptedFile')}} style={{cursor: 'pointer'}}>
+              <Upload disabled>
+              {
+                this.state.isDecryptedSuccess ?
+                <div>
+                  <a href="/decryption/DecryptedFile.txt">
+                    <div class="ant-upload-list ant-upload-list-text">
                       <div class="ant-upload-list-item ant-upload-list-item-done">
                         <div class="ant-upload-list-item-info">
                           <span>
                             <i class="anticon anticon-paper-clip" />
-                            <span class="ant-upload-list-item-name" title="">EncryptedFile</span>
+                            <span class="ant-upload-list-item-name" title="">DecryptedFile.txt</span>
                           </span>
                         </div>
                         <i title="删除文件" class="anticon anticon-cross" />
                       </div>
                     </div>
-                  </div> : null
-                }
+                  </a>
+                </div> : null
+              }
               </Upload>
             </Tabs.TabPane>
           </Tabs>
