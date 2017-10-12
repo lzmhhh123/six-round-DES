@@ -274,7 +274,7 @@ class App extends Component {
       this.state.encryptionKey4,
       this.state.encryptionKey5,
       this.state.encryptionKey6
-    ), this.state.isEncryptedSuccess);
+    ), this.state.isEncryptedSuccess, window);
     const encryptionProps = {
       name: 'file',
       action: '/api/uploadToEncryption',
@@ -341,21 +341,28 @@ class App extends Component {
                 <Button>
                   <Icon type="upload" /> Click to Upload .txt File
                 </Button>
+              </Upload>
+              {
+                this.state.isEncryptedSuccess ?
+                <Alert type="success" message="Please Click the following file to download." showIcon /> : null
+              }
+              <Upload disabled>
                 {
                   this.state.isEncryptedSuccess ?
                   <div>
-                    <Alert type="success" message="Please Click the following file to download." showIcon />
-                    <div class="ant-upload-list ant-upload-list-text" onClick={() => {window.open('/build/encryption/EncryptionFile')}}>
-                      <div class="ant-upload-list-item ant-upload-list-item-done">
-                        <div class="ant-upload-list-item-info">
-                          <span>
-                            <i class="anticon anticon-paper-clip" />
-                            <span class="ant-upload-list-item-name" title="">EncryptionFile</span>
-                          </span>
+                    <a href="/encryption/" download="EncryptedFile">
+                      <div class="ant-upload-list ant-upload-list-text" >
+                        <div class="ant-upload-list-item ant-upload-list-item-done">
+                          <div class="ant-upload-list-item-info">
+                            <span>
+                              <i class="anticon anticon-paper-clip" />
+                              <span class="ant-upload-list-item-name" title="">EncryptedFile</span>
+                            </span>
+                          </div>
+                          <i title="删除文件" class="anticon anticon-cross" />
                         </div>
-                        <i title="删除文件" class="anticon anticon-cross" />
                       </div>
-                    </div>
+                    </a>
                   </div> : null
                 }
               </Upload>
@@ -404,16 +411,21 @@ class App extends Component {
                 <Button>
                   <Icon type="upload" /> Click to Upload Binary Secret File
                 </Button>
+              </Upload>
+              {
+                this.state.isEncryptedSuccess ?
+                <Alert type="success" message="Please Click the following file to download." showIcon /> : null
+              }
+              <Upload>
                 {
                   this.state.isEncryptedSuccess ?
                   <div>
-                    <Alert type="success" message="Please Click the following file to download." showIcon />
-                    <div class="ant-upload-list ant-upload-list-text" onClick={() => {window.open('/build/EncryptionFile')}}>
+                    <div class="ant-upload-list ant-upload-list-text" onClick={() => {window.open('/encryption/EncryptedFile')}} style={{cursor: 'pointer'}}>
                       <div class="ant-upload-list-item ant-upload-list-item-done">
                         <div class="ant-upload-list-item-info">
                           <span>
                             <i class="anticon anticon-paper-clip" />
-                            <span class="ant-upload-list-item-name" title="">EncryptionFile</span>
+                            <span class="ant-upload-list-item-name" title="">EncryptedFile</span>
                           </span>
                         </div>
                         <i title="删除文件" class="anticon anticon-cross" />
