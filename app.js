@@ -24,8 +24,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(__dirname + '/build'))
 
-app.get('/', function (request, response){
-  response.sendFile(path.resolve(__dirname, 'build', 'index.html'))
+app.get('/', function (request, response) {
+  response.sendFile(path.resolve(__dirname, 'build', 'index.html'));
+})
+
+app.get('/build/encryption/EncryptedFile', (req, res) => {
+  res.sendFile(path.resolve(__dirname, 'build', 'encryption', 'EncryptedFile'));
 })
 
 const storage = multer.diskStorage({

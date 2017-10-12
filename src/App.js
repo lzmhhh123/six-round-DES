@@ -345,7 +345,7 @@ class App extends Component {
                   this.state.isEncryptedSuccess ?
                   <div>
                     <Alert type="success" message="Please Click the following file to download." showIcon />
-                    <div class="ant-upload-list ant-upload-list-text" onClick={() => {window.open('/build/EncryptionFile')}}>
+                    <div class="ant-upload-list ant-upload-list-text" onClick={() => {window.open('/build/encryption/EncryptionFile')}}>
                       <div class="ant-upload-list-item ant-upload-list-item-done">
                         <div class="ant-upload-list-item-info">
                           <span>
