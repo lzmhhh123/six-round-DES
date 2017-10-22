@@ -335,7 +335,7 @@ class App extends Component {
                 showIcon
                 description={
                   <span>
-                    <span>Please read the <strong>README.md</strong> carefully before use this six-round-DES.</span>
+                    <span>Please read the <a href="https://github.com/lzmhhh123/six-round-DES"><strong>README.md</strong></a> carefully before use this six-round-DES.</span>
                     <br />
                     <span>{`It\' use the CBC model to resolve text. The CBC model\'s initial Vector IV is [0, 0, ..., 0]`}</span>
                   </span>
@@ -405,7 +405,7 @@ class App extends Component {
                 showIcon
                 description={
                   <span>
-                    <span>Please read the <strong>README.md</strong> carefully before use this six-round-DES.</span>
+                    <span>Please read the <a href="https://github.com/lzmhhh123/six-round-DES"><strong>README.md</strong></a> carefully before use this six-round-DES.</span>
                     <br />
                     <span>{`It\' use the CBC model to resolve text. The CBC model\'s initial Vector IV is [0, 0, ..., 0]`}</span>
                   </span>
